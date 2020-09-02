@@ -3,6 +3,7 @@ import "./Kennel.css"
 import { Animal } from "./animal/Animal"
 import { Location } from "./Location/Location"
 import { Customer } from "./Customer/Customer"
+import { Employee } from "./Employee/Employee"
 
 export const Kennel = () => (
     <>
@@ -33,6 +34,13 @@ export const Kennel = () => (
           <Customer />
           <Customer />
           <Customer />
+        </article>
+
+        <h2>Employees</h2>
+        <article className="employees">
+          <Employee />
+          <Employee />
+          <Employee />
         </article>
     </>
 )
