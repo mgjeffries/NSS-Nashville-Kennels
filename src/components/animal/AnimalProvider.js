@@ -3,7 +3,7 @@ import React, { useState } from "react"
 export const AnimalContext = React.createContext()
 
 
-export const AnmimalProvider = (props) => {
+export const AnimalProvider = (props) => {
     const [animals, setAnimals] = useState([])
 
     const getAnimals = () => {
