@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useEffect } from "react"
-import { LocationContext } from "../location/LocationProvider"
+import { LocationContext } from "../Location/LocationProvider"
 import { AnimalContext } from "../animal/AnimalProvider"
 
 export const AnimalForm = (props) => {
@@ -8,7 +8,7 @@ export const AnimalForm = (props) => {
 
     const name = useRef(null)
     const location = useRef(null)
-    const animal = useRef(null)
+    const breed = useRef(null)
 
     useEffect(() => {
        getAnimals().then(getLocations)
@@ -16,15 +16,16 @@ export const AnimalForm = (props) => {
 
     const constructNewAnimal = () => {
         const locationId = parseInt(location.current.value)
-        const animalId = parseInt(animal.current.value)
+        const customerId = parseInt(localStorage.getItem("kennel_customer"))
 
         if (locationId === 0) {
             window.alert("Please select a location")
         } else {
             addAnimal({
                 name: name.current.value,
+                breed: breed.current.value,
                 locationId,
-                animalId
+                customerId
             })
             .then(() => props.history.push("/animals"))
         }
@@ -36,7 +37,13 @@ export const AnimalForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="animalName">animal name: </label>
-                    <input type="text" id="animalName" ref={name} required autoFocus className="form-control" placeholder="animal name" />
+                    <input type="text" id="animalName" ref={name} required autoFocus className="form-control" placeholder="Spot" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="animalBreed">animal breed: </label>
+                    <input type="text" id="animalBreed" ref={breed} required autoFocus className="form-control" placeholder="Dalmation" />
                 </div>
             </fieldset>
             <fieldset>
