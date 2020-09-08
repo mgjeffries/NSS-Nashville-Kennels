@@ -5,7 +5,7 @@ import { LocationContext } from "../Location/LocationProvider"
 import { CustomerContext } from "../Customer/CustomerProvider"
 
 
-export const AnimalList = () => {
+export const AnimalList = (props) => {
     const { animals, getAnimals } = useContext(AnimalContext)
     const { locations, getLocations } = useContext(LocationContext)
     const { customers, getCustomers } = useContext(CustomerContext)
@@ -25,6 +25,15 @@ export const AnimalList = () => {
 
     return (
         <div className="animals">
+        <button type="submit"
+                onClick={evt => {
+                    evt.preventDefault() // Prevent browser from submitting the form
+                    props.history.push("./animals/create")
+                }}
+                className="btn btn-primary">
+                Make Appointment
+            </button>
+
         {
             animals.map(a =>{
               const owner = customers.find(c => c.id === a.customerId) || {}
