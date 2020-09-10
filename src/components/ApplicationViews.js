@@ -13,6 +13,7 @@ import { AnimalForm } from "./animal/AnimalForm"
 import { EmployeeDetail } from "./Employee/EmployeeDetail"
 import { LocationDetail } from "./Location/LocationDetail"
 import { AnimalDetails } from "./animal/AnimalDetail"
+import { AnimalSearch } from "./animal/AnimalSearch"
 
 export const ApplicationViews = (props) => {
     return (
@@ -36,7 +37,10 @@ export const ApplicationViews = (props) => {
                     <LocationProvider>
                         {/* Render the animal list when http://localhost:3000/animals */}
                         <Route exact path="/animals" render={
-                            props => <AnimalList {...props}/>
+                            props => <>
+                            <AnimalSearch />
+                            <AnimalList {...props}/>
+                            </>
                         } /> 
                         <Route path="/animals/:animalId(\d+)" render={
                             props => <AnimalDetails {...props} />
