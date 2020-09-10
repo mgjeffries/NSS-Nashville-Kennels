@@ -10,5 +10,6 @@ export const Animal = ({animal, customer, location}) => (
             </Link>
         </h3>
         <div className="animal__breed">Breed: {animal.breed}</div>
+        <div className="animal__treatment">Treatment: {animal.treatment}</div>
     </section>
 )
