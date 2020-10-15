@@ -14,7 +14,8 @@ export const AnimalProvider = (props) => {
     }
 
     const getAnimalById = (id) => {
-        return fetch(`http://localhost:8088/animals/${ id }?_expand=location&_expand=customer`)
+        // Note: the python database expands the animals by customer and Id by default
+        return fetch(`http://localhost:8088/animals/${ id }`)
             .then(res => res.json())
     }
 
