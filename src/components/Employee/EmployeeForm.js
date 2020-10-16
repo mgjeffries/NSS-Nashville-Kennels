@@ -1,13 +1,11 @@
 import React, { useContext, useRef, useEffect } from "react"
 import { EmployeeContext } from "./EmployeeProvider"
 import { LocationContext } from "../Location/LocationProvider"
-import { AnimalContext } from "../animal/AnimalProvider"
 import "./Employee.css"
 
 export const EmployeeForm = (props) => {
     const { addEmployee } = useContext(EmployeeContext)
     const { locations, getLocations } = useContext(LocationContext)
-    const { animals, getAnimals } = useContext(AnimalContext)
 
     /*
         Create references that can be attached to the input
@@ -19,24 +17,15 @@ export const EmployeeForm = (props) => {
     */
     const name = useRef(null)
     const location = useRef(null)
-    const animal = useRef(null)
+    const employeeAddress = useRef(null)
 
-    /*
-        Get animal state and location state on initialization.
-    */
     useEffect(() => {
-       getAnimals().then(getLocations)
+        getLocations()
     }, [])
 
     const constructNewEmployee = () => {
-        /*
-            The `location` and `animal` variables below are
-            the references attached to the input fields. You
-            can't just ask for the `.value` property directly,
-            but rather `.current.value` now in React.
-        */
+      
         const locationId = parseInt(location.current.value)
-        const animalId = parseInt(animal.current.value)
 
         if (locationId === 0) {
             window.alert("Please select a location")
@@ -44,7 +33,7 @@ export const EmployeeForm = (props) => {
             addEmployee({
                 name: name.current.value,
                 locationId,
-                animalId
+                address: employeeAddress.current.value
             })
             .then(() => props.history.push("/employees"))
         }
@@ -74,15 +63,9 @@ export const EmployeeForm = (props) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">Caretaker for: </label>
-                    <select defaultValue="" name="animal" ref={animal} id="employeeAnimal" className="form-control" >
-                        <option value="0">Select an animal</option>
-                        {animals.map(e => (
-                            <option key={e.id} value={e.id}>
-                                {e.name}
-                            </option>
-                        ))}
-                    </select>
+                    <label htmlFor="employeeAddress">Employee Address: </label>
+                    <input type="text" name="employeeAddress" ref={employeeAddress} id="employeeAddress" className="form-control" >
+                    </input>
                 </div>
             </fieldset>
             <button type="submit"
